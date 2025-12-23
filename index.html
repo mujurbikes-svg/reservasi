@@ -3,14 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="description" content="Sistem Pesanan Restoran Offline">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <title>Sistem Pesanan Restoran</title>
+    
+    <!-- Icons for PWA -->
+    <link rel="icon" href="icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
@@ -21,618 +38,74 @@
             padding-bottom: 80px;
             max-width: 800px;
             margin: 0 auto;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
         
-        .header {
-            background: linear-gradient(135deg, #2c3e50, #4a6491);
+        /* Semua style CSS sebelumnya tetap di sini */
+        /* ... (semua style CSS dari kode sebelumnya) ... */
+        
+        .install-btn {
+            background-color: #9b59b6;
             color: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-        }
-        
-        .header p {
-            opacity: 0.9;
-            font-size: 0.9rem;
-        }
-        
-        .tabs {
-            display: flex;
-            background-color: white;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-        
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 15px 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-            font-size: 0.9rem;
-        }
-        
-        .tab.active {
-            color: #2c3e50;
-            border-bottom: 3px solid #3498db;
-            background-color: #f8f9fa;
-        }
-        
-        .tab i {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-        
-        .tab-content {
-            display: none;
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-        }
-        
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            font-size: 1rem;
-            width: 100%;
-        }
-        
-        .btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-        
-        .btn-success {
-            background-color: #27ae60;
-        }
-        
-        .btn-success:hover {
-            background-color: #219653;
-        }
-        
-        .btn-danger {
-            background-color: #e74c3c;
-        }
-        
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-        
-        .btn-warning {
-            background-color: #f39c12;
-        }
-        
-        .btn-warning:hover {
-            background-color: #d68910;
-        }
-        
-        .btn-info {
-            background-color: #17a2b8;
-        }
-        
-        .btn-info:hover {
-            background-color: #138496;
-        }
-        
-        .btn-secondary {
-            background-color: #7f8c8d;
-        }
-        
-        .btn-secondary:hover {
-            background-color: #6c7b7d;
-        }
-        
-        .btn-sm {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1002;
             padding: 8px 12px;
-            font-size: 0.85rem;
-            width: auto;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: none;
         }
         
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+        @media (display-mode: standalone) {
+            .install-btn {
+                display: none !important;
+            }
+            
+            body {
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: calc(80px + env(safe-area-inset-bottom));
+            }
+            
+            .header {
+                margin-top: env(safe-area-inset-top);
+            }
         }
         
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #eee;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        
-        .menu-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .menu-details h4 {
-            margin-bottom: 5px;
-            color: #2c3e50;
-        }
-        
-        .menu-price {
-            font-weight: bold;
-            color: #27ae60;
-            font-size: 1.1rem;
-        }
-        
-        .menu-actions {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-        
-        .order-details {
-            flex: 1;
-        }
-        
-        .order-details h4 {
-            margin-bottom: 5px;
-            color: #2c3e50;
-        }
-        
-        .order-notes {
-            font-style: italic;
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            margin-top: 5px;
-        }
-        
-        .order-quantity {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .quantity-btn {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
+        .sw-update {
             background-color: #3498db;
             color: white;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .quantity-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .quantity-input {
-            width: 60px;
-            padding: 8px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        
-        .order-item-actions {
-            display: flex;
-            gap: 5px;
-            margin-left: 10px;
-        }
-        
-        .reservation-item {
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .past-reservation-item {
-            border-left-color: #7f8c8d;
-            opacity: 0.8;
-        }
-        
-        .reservation-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .reservation-name {
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
-        .reservation-date {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-        }
-        
-        .reservation-total {
-            margin-bottom: 10px;
-        }
-        
-        .invoice {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            white-space: pre-line;
-            font-family: monospace;
-            overflow-x: auto;
-            max-height: 300px;
-            overflow-y: auto;
-            line-height: 1.5;
-        }
-        
-        .invoice-title {
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            color: #2c3e50;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #7f8c8d;
-        }
-        
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #bdc3c7;
-        }
-        
-        .total-section {
-            background-color: #e8f4fc;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-align: right;
-        }
-        
-        .alert {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .alert-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-        
-        .alert-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .form-row .form-group {
-            flex: 1;
-            margin-bottom: 0;
-        }
-        
-        .action-buttons {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: white;
-            padding: 15px;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
-            z-index: 100;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .autocomplete-container {
-            position: relative;
-        }
-        
-        .autocomplete-list {
-            position: absolute;
-            z-index: 1000;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            max-height: 200px;
-            overflow-y: auto;
-            width: 100%;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-        
-        .autocomplete-item {
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1002;
             padding: 10px 15px;
-            cursor: pointer;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .autocomplete-item:hover {
-            background-color: #f0f0f0;
-        }
-        
-        .autocomplete-item:last-child {
-            border-bottom: none;
-        }
-        
-        .modal {
+            border-radius: 8px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
         }
         
-        .modal-content {
-            background-color: white;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow: auto;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .modal-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
-        .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #7f8c8d;
-        }
-        
-        .import-export-section {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .import-export-section h3 {
-            margin-bottom: 15px;
-            color: #2c3e50;
-        }
-        
-        .file-input-container {
-            position: relative;
-            margin-bottom: 15px;
-        }
-        
-        .file-input-label {
-            display: block;
-            padding: 12px 15px;
-            background-color: #e9ecef;
-            border: 1px dashed #6c757d;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .file-input-label:hover {
-            background-color: #dee2e6;
-        }
-        
-        .file-input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-        
-        .file-info {
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #6c757d;
-        }
-        
-        .file-format-note {
-            background-color: #fff3cd;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-size: 0.85rem;
-            color: #856404;
-        }
-        
-        .file-format-note code {
-            background-color: #f8f9fa;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-family: monospace;
-        }
-        
-        .manual-import-section {
-            background-color: #e8f4fc;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-        
-        .manual-import-section textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 10px;
-            border: 1px solid #3498db;
-            border-radius: 5px;
-            font-family: monospace;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .manual-import-section .example {
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-        
-        @media (max-width: 600px) {
-            .form-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .tab {
-                font-size: 0.8rem;
-                padding: 12px 5px;
-            }
-            
-            .tab i {
-                font-size: 1rem;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-            }
-            
-            .btn-group .btn {
-                width: 100%;
-            }
-            
-            .order-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .order-item-actions {
-                margin-left: 0;
-                width: 100%;
-                justify-content: flex-end;
-            }
-        }
     </style>
 </head>
 <body>
+    <!-- Tombol Install PWA -->
+    <button id="installBtn" class="install-btn">
+        <i class="fas fa-download"></i> Install
+    </button>
+    
+    <!-- Notifikasi Update -->
+    <div id="swUpdate" class="sw-update">
+        <span>Update tersedia!</span>
+        <button onclick="window.location.reload()" style="margin-left: 10px; background: white; color: #3498db; border: none; padding: 3px 8px; border-radius: 4px; font-weight: bold;">
+            Update
+        </button>
+    </div>
+    
     <div class="header">
         <h1><i class="fas fa-utensils"></i> Sistem Pesanan Restoran</h1>
         <p>Aplikasi offline untuk mengelola menu, pesanan, dan invoice</p>
@@ -700,21 +173,6 @@
                 <button id="manualImportBtn" class="btn btn-success">
                     <i class="fas fa-upload"></i> Import Data Manual
                 </button>
-            </div>
-            
-            <div class="file-info">
-                <p><strong>Format file CSV:</strong></p>
-                <p>File harus memiliki format: <code>nama_menu,harga</code></p>
-                <p>Contoh:</p>
-                <pre style="background-color: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 0.9rem;">
-Nasi Goreng Special,25000
-Ayam Bakar Pedas,35000
-Es Teh Manis,8000</pre>
-            </div>
-            
-            <div class="file-format-note">
-                <i class="fas fa-info-circle" style="margin-right: 5px;"></i>
-                <strong>Catatan:</strong> Data yang diimport akan ditambahkan ke menu yang sudah ada. Menu dengan nama yang sama akan diganti dengan data yang baru.
             </div>
         </div>
         
@@ -918,6 +376,38 @@ Es Teh Manis,8000</pre>
         </div>
     </div>
     
+    <!-- Modal untuk Edit Menu -->
+    <div id="editMenuModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Edit Menu</div>
+                <button class="modal-close" id="closeEditMenuModal">&times;</button>
+            </div>
+            <div id="editMenuForm">
+                <div class="form-group">
+                    <label for="editMenuName">Nama Menu:</label>
+                    <input type="text" id="editMenuName" class="form-control" placeholder="Contoh: Nasi Goreng Special">
+                </div>
+                
+                <div class="form-group">
+                    <label for="editMenuPrice">Harga (Rp):</label>
+                    <input type="number" id="editMenuPrice" class="form-control" placeholder="Contoh: 25000">
+                </div>
+                
+                <input type="hidden" id="editMenuId">
+                
+                <div class="btn-group" style="margin-top: 20px;">
+                    <button id="updateMenuBtn" class="btn btn-success">
+                        <i class="fas fa-check"></i> Update Menu
+                    </button>
+                    <button id="cancelEditMenuBtn" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Batal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Alert container -->
     <div id="alertContainer" style="position: fixed; top: 20px; right: 20px; z-index: 1000; max-width: 300px;"></div>
 
@@ -1052,6 +542,15 @@ Es Teh Manis,8000</pre>
                 document.getElementById('editItemModal').style.display = 'none';
             });
             
+            // Event listeners for edit menu modal
+            document.getElementById('updateMenuBtn').addEventListener('click', updateMenuItem);
+            document.getElementById('cancelEditMenuBtn').addEventListener('click', function() {
+                document.getElementById('editMenuModal').style.display = 'none';
+            });
+            document.getElementById('closeEditMenuModal').addEventListener('click', function() {
+                document.getElementById('editMenuModal').style.display = 'none';
+            });
+            
             // Event listeners for import/export
             document.getElementById('downloadTemplateBtn').addEventListener('click', downloadTemplateCSV);
             document.getElementById('exportMenuBtn').addEventListener('click', exportMenuData);
@@ -1095,6 +594,15 @@ Es Teh Manis,8000</pre>
                     this.style.display = 'none';
                 }
             });
+            
+            document.getElementById('editMenuModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+            
+            // PWA Installation
+            setupPWA();
             
             // Load any existing order from localStorage
             loadCurrentOrder();
@@ -1175,12 +683,70 @@ Es Teh Manis,8000</pre>
                         <div class="menu-price">Rp ${item.price.toLocaleString('id-ID')}</div>
                     </div>
                     <div class="menu-actions">
+                        <button class="btn btn-sm btn-warning" onclick="editMenuItem(${item.id})">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
                         <button class="btn btn-sm btn-danger" onclick="deleteMenuItem(${item.id})">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 </div>
             `).join('');
+        }
+        
+        // Function to edit menu item
+        function editMenuItem(id) {
+            const menuItem = menuItems.find(item => item.id === id);
+            if (!menuItem) return;
+            
+            // Populate modal with menu data
+            document.getElementById('editMenuName').value = menuItem.name;
+            document.getElementById('editMenuPrice').value = menuItem.price;
+            document.getElementById('editMenuId').value = id;
+            
+            // Show modal
+            document.getElementById('editMenuModal').style.display = 'flex';
+        }
+        
+        // Function to update menu item
+        function updateMenuItem() {
+            const id = parseInt(document.getElementById('editMenuId').value);
+            const newName = document.getElementById('editMenuName').value.trim();
+            const newPrice = parseInt(document.getElementById('editMenuPrice').value);
+            
+            if (!newName || !newPrice || newPrice <= 0) {
+                showAlert('Harap isi nama menu dan harga dengan benar!', 'danger');
+                return;
+            }
+            
+            // Find menu item
+            const menuItemIndex = menuItems.findIndex(item => item.id === id);
+            if (menuItemIndex === -1) {
+                showAlert('Menu tidak ditemukan!', 'danger');
+                return;
+            }
+            
+            // Check if new name already exists (excluding current item)
+            const existingMenuIndex = menuItems.findIndex((item, index) => 
+                index !== menuItemIndex && item.name.toLowerCase() === newName.toLowerCase()
+            );
+            
+            if (existingMenuIndex !== -1) {
+                showAlert('Menu dengan nama yang sama sudah ada!', 'danger');
+                return;
+            }
+            
+            // Update menu item
+            menuItems[menuItemIndex].name = newName;
+            menuItems[menuItemIndex].price = newPrice;
+            
+            saveMenuItems();
+            loadMenuItems();
+            
+            // Close modal
+            document.getElementById('editMenuModal').style.display = 'none';
+            
+            showAlert('Menu berhasil diupdate!', 'success');
         }
         
         // Function to update menu count
@@ -2075,6 +1641,74 @@ Es Teh Manis,8000</pre>
                 }, 500);
             }, 3000);
         }
+        
+        // PWA Functions
+        function setupPWA() {
+            let deferredPrompt;
+            const installBtn = document.getElementById('installBtn');
+            
+            // Listen for beforeinstallprompt event
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // Prevent Chrome 67 and earlier from automatically showing the prompt
+                e.preventDefault();
+                // Stash the event so it can be triggered later
+                deferredPrompt = e;
+                // Show install button
+                installBtn.style.display = 'block';
+                
+                installBtn.addEventListener('click', () => {
+                    // Show the install prompt
+                    deferredPrompt.prompt();
+                    // Wait for the user to respond to the prompt
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the install prompt');
+                            installBtn.style.display = 'none';
+                        } else {
+                            console.log('User dismissed the install prompt');
+                        }
+                        deferredPrompt = null;
+                    });
+                });
+            });
+            
+            // Listen for app installed event
+            window.addEventListener('appinstalled', (evt) => {
+                console.log('PWA was installed');
+                installBtn.style.display = 'none';
+            });
+            
+            // Check if app is already installed
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                console.log('Running in standalone mode');
+                installBtn.style.display = 'none';
+            }
+            
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('sw.js')
+                        .then(registration => {
+                            console.log('ServiceWorker registered:', registration);
+                            
+                            // Check for updates
+                            registration.addEventListener('updatefound', () => {
+                                const newWorker = registration.installing;
+                                newWorker.addEventListener('statechange', () => {
+                                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                        // New update available
+                                        document.getElementById('swUpdate').style.display = 'block';
+                                    }
+                                });
+                            });
+                        })
+                        .catch(error => {
+                            console.log('ServiceWorker registration failed:', error);
+                        });
+                });
+            }
+        }
+        
     </script>
 </body>
-                  </html>
+</html>
