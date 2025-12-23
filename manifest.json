@@ -1,101 +1,28 @@
 {
   "name": "Sistem Pesanan Restoran",
-  "short_name": "Resto Order",
-  "description": "Aplikasi offline untuk mengelola pesanan restoran",
-  "start_url": "/resto-order-system/",
-  "scope": "/resto-order-system/",
+  "short_name": "RestoOrder",
+  "description": "Aplikasi offline untuk mengelola menu, pesanan, dan invoice restoran",
+  "start_url": "/",
   "display": "standalone",
-  "display_override": ["standalone", "window-controls-overlay"],
-  "background_color": "#2c3e50",
+  "orientation": "portrait",
   "theme_color": "#2c3e50",
-  "orientation": "portrait-primary",
-  "categories": ["business", "productivity"],
-  "lang": "id-ID",
-  "dir": "ltr",
+  "background_color": "#f8f9fa",
   "icons": [
     {
-      "src": "icons/icon-72x72.png",
-      "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-96x96.png",
-      "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-128x128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-144x144.png",
-      "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-152x152.png",
-      "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-192x192.png",
+      "src": "icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-384x384.png",
-      "sizes": "384x384",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-512x512.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     }
   ],
-  "screenshots": [
-    {
-      "src": "screenshots/screenshot1.png",
-      "sizes": "1080x1920",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Buat Pesanan Baru",
-      "short_name": "Pesanan Baru",
-      "description": "Buat pesanan baru",
-      "url": "/resto-order-system/#order",
-      "icons": [
-        {
-          "src": "icons/shortcut-icon-96x96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
-    },
-    {
-      "name": "Lihat Reservasi",
-      "short_name": "Reservasi",
-      "description": "Lihat daftar reservasi",
-      "url": "/resto-order-system/#reservations",
-      "icons": [
-        {
-          "src": "icons/shortcut-icon-96x96.png",
-          "sizes": "96x96",
-          "type": "image/png"
-        }
-      ]
-    }
-  ]
+  "scope": "/",
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "id-ID",
+  "dir": "ltr"
 }
